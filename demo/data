@@ -1,0 +1,9 @@
+[Thu Oct 31 18:10:34 2024] post_bug.cgi: export CONTENT_LENGTH=3134 at /var/www/bugzilla/post_bug.cgi line 41.
+[Thu Oct 31 18:10:34 2024] post_bug.cgi: export SERVER_NAME=39.105.54.64 at /var/www/bugzilla/post_bug.cgi line 41.
+[Thu Oct 31 18:10:34 2024] post_bug.cgi: export CONTENT_TYPE=multipart/form-data; boundary=--------------------------016052583195061613602135 at /var/www/bugzilla/post_bug.cgi line 41.
+[Thu Oct 31 18:10:34 2024] post_bug.cgi: export HTTP_ORIGIN=http://39.105.54.64:8090 at /var/www/bugzilla/post_bug.cgi line 41.
+[Thu Oct 31 18:10:34 2024] post_bug.cgi: export HTTP_ACCEPT_ENCODING=gzip, deflate, br at /var/www/bugzilla/post_bug.cgi line 41.
+[Thu Oct 31 18:10:34 2024] post_bug.cgi: export HTTP_UPGRADE_INSECURE_REQUESTS=1 at /var/www/bugzilla/post_bug.cgi line 41.
+[Thu Oct 31 18:10:34 2024] post_bug.cgi: export SERVER_PROTOCOL=HTTP/1.1 at /var/www/bugzilla/post_bug.cgi line 41.
+[Thu Oct 31 18:10:34 2024] post_bug.cgi: export REQUEST_URI=/bugzilla/post_bug.cgi at /var/www/bugzilla/post_bug.cgi line 41.
+[Thu Oct 31 18:10:34 2024] post_bug.cgi: export SERVER_PORT=8090 at /var/www/bugzilla/post_bug.cgi line 41.
