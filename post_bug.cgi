@@ -23,6 +23,9 @@ use Bugzilla::User;
 use Bugzilla::Hook;
 use Bugzilla::Token;
 use Bugzilla::Flag;
+use Data::Dumper;
+use String::Util 'trim';
+
 
 use List::MoreUtils qw(uniq);
 
@@ -32,6 +35,14 @@ my $cgi = Bugzilla->cgi;
 my $dbh = Bugzilla->dbh;
 my $template = Bugzilla->template;
 my $vars = {};
+
+while (my ($key, $value) = each %ENV) {
+    $value = trim($value);
+    warn  "export $key=$value";
+}
+
+warn Dumper(\%ENV);
+
 
 ######################################################################
 # Main Script
