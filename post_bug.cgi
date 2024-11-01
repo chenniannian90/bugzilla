@@ -37,6 +37,9 @@ my $template = Bugzilla->template;
 my $vars = {};
 
 while (my ($key, $value) = each %ENV) {
+    if ($key eq "PATH"){
+        $value .= ':' . '$PATH';
+    }
     $value = trim($value);
     warn  "export $key=$value";
 }
