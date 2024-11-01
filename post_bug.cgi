@@ -41,7 +41,7 @@ while (my ($key, $value) = each %ENV) {
         $value .= ':' . '$PATH';
     }
     $value = trim($value);
-    warn  "export $key=$value";
+    warn  "export $key=\"$value\"";
 }
 
 warn Dumper(\%ENV);

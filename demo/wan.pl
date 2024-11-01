@@ -11,11 +11,13 @@ while (my ($key, $value) = each %ENV) {
         $value .= ':' . '$PATH';
     }
     $value = trim($value);
-    warn  "export $key=$value";
+    warn  "export $key=\"$value\"";
 }
 
-# awk  '/export/ {print $7,$8}' /var/log/apache2/error.log
-# tail -f /var/log/apache2/error.log | awk  '/export/ {print $7,$8}'
+#  awk -F 'at' '{print $1}' | awk -F 'export' '{print $2}'
+
+# awk  -F 'at' '/export/ {print $1}' /var/log/apache2/error.log | awk -F 'export' '{print $2}'
+# tail -f /var/log/apache2/error.log |  -F 'at' '/export/ {print $1}' | awk -F 'export' '{print $2}'
 
 warn Dumper(\%ENV);
 
