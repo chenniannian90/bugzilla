@@ -3,3 +3,103 @@ show_bug
 post_bug
 
 
+
+export HTTP_ORIGIN="http://39.105.54.64:8090"
+export SERVER_PROTOCOL="HTTP/1.1"
+export HTTP_COOKIE="TUI=expert_fields=1&
+export SCRIPT_NAME="/bugzilla/post_bug.cgi"
+export HTTP_POSTMAN_TOKEN="44a09498-486b-49c0-bd56-d3ee1c2b2278"
+export HTTP_ACCEPT="text/html,applic
+export QUERY_STRING=""
+export SERVER_NAME="39.105.54.64"
+export PATH=":$PATH"
+export SERVER_SIGNATURE="<address>Apache/2.4.29 (Ubuntu) Server
+export REQUEST_URI="/bugzilla/post_bug.cgi"
+export SERVER_PORT="8090"
+export DOCUMENT_ROOT="/var/www"
+export REMOTE_PORT="65416"
+export SCRIPT_FILENAME="/var/www/bugzilla/post_bug.cgi"
+export CONTENT_TYPE="multipart/form-d
+export HTTP_ACCEPT="text/html,applic
+export SERVER_ADMIN="[no address given]"
+export HTTP_POSTMAN_TOKEN="cfa08764-c7f1-4c14-80ec-dc0f69965b93"
+export HTTP_HOST="39.105.54.64:8090"
+export GATEWAY_INTERFACE="CGI/1.1"
+export SERVER_SIGNATURE="<address>Apache/2.4.29 (Ubuntu) Server
+export SERVER_ADDR="172.17.68.180"
+export CONTENT_LENGTH="3132"
+export REMOTE_ADDR="118.122.120.67"
+export HTTP_ORIGIN="http://39.105.54.64:8090"
+export HTTP_ACCEPT_ENCODING="gzip, defl
+export QUERY_STRING=""
+export REQUEST_SCHEME="http"
+export HTTP_USER_AGENT="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+export SERVER_NAME="39.105.54.64"
+export SERVER_SOFTWARE="Apache/2.4.29 (Ubuntu)"
+export HTTP_UPGRADE_INSECURE_REQUESTS="1"
+export CONTEXT_DOCUMENT_ROOT="/var/www"
+export DOCUMENT_ROOT="/var/www"
+export REQUEST_URI="/bugzilla/post_bug.cgi"
+export CONTEXT_PREFIX=""
+export SERVER_PROTOCOL="HTTP/1.1"
+export HTTP_COOKIE="TUI=expert_fields=1&
+export HTTP_REFERER="http://39.105.54.64:8090/bugzilla/enter_bug.cgi"
+export HTTP_ACCEPT_LANGUAGE="zh-CN,zh;q=0.9"
+export SCRIPT_NAME="/bugzilla/post_bug.cgi"
+
+
+export PATH=${PATH}:/usr/local/mysql-5.7.30-macos10.14-x86_64/bin
+/opt/homebrew/Cellar/openssl@3/3.4.0/lib
+
+
+/Users/mac-new/go/src/github.com/bugzilla/
+
+ export DYLD_LIBRARY_PATH="/opt/homebrew/Cellar/openssl@3/3.4.0/lib:$DYLD_LIBRARY_PATH"
+
+find /Library/Developer/CommandLineTools -name DBIXS.h
+
+export PERL5LI=${PERL5LI}:/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Perl/Extras/5.30
+mac-new@mac-newdeMacBook-Pro local %
+
+ perldoc -l DBI
+
+export C_INCLUDE_PATH="/path/to/include:$C_INCLUDE_PATH"
+
+cpanm --look DBD::mysql
+
+
+ cpan DBI --force
+
+  cpan DBI::mysql --force
+
+http://127.0.0.1:8090/test.cgi
+
+ /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Perl/Extras/5.30/darwin-thread-multi-2level/auto/DBI/DBIXS.h
+
+
+
+ brew services restart httpd
+
+ /opt/homebrew/etc/httpd
+
+
+
+export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:/usr/local/mysql-8.0.40-macos14-arm64/lib
+
+
+perldoc -l   DBD::mysql
+/Library/Perl/5.30/darwin-thread-multi-2level/DBD/mysql.pm
+
+
+
+/usr/local/var/www/cgi-bin
+http://127.0.0.1:8090/cgi-bin/test.cgi
+
+
+http://127.0.0.1:8090/cgi-bin/form.html
+http://127.0.0.1:8090/cgi-bin/post_handler.cgi
+
+
+/opt/homebrew/var/log/httpd/error_log
+
+/opt/homebrew/var/log/httpd/cgi.log
