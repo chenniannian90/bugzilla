@@ -6,6 +6,56 @@ use strict;
 use warnings;
 use Data::Dumper;
 use CGI qw(:standard);
+use Devel::REPL;
+
+
+my $a = 10;
+my $b = 20;
+my $c = $a + $b;
+
+
+
+my $repl = Devel::REPL->new;
+$repl->load_plugin($_) for qw(History LexEnv);
+$repl->run;
+
+print "Sum: $c\n";
+
+my $bug_params = {
+    'assigned_to' => '1028630307@qq.com',
+    'status_whiteboard' => undef,
+    'blocked' => '',
+    'comment' => '',
+    'short_desc' => '101',
+    'product' => 'TestProduct',
+    'qa_contact' => undef,
+    'priority' => '---',
+    'bug_status' => 'CONFIRMED',
+    'deadline' => '',
+    'alias' => '',
+    'target_milestone' => undef,
+    'dependson' => '',
+    'bug_file_loc' => 'http://',
+    'op_sys' => 'Mac OS',
+    'version' => 'unspecified',
+    'estimated_time' => '',
+    'component' => 'TestComponent',
+    'keywords' => undef,
+    'see_also' => '',
+    'rep_platform' => 'PC',
+    'bug_severity' => 'enhancement',
+    'comment_is_private' => undef
+};
+
+
+
+
+
+
+
+
+
+my $start = 1;
 
 
 

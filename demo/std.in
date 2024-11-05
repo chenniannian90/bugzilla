@@ -1,1 +1,109 @@
-name=12&email=1028630307%40qq.com
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="product"
+
+TestProduct
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="token"
+
+RQ5rz44TVM
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="component"
+
+TestComponent
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="version"
+
+unspecified
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="bug_severity"
+
+enhancement
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="priority"
+
+---
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="rep_platform"
+
+PC
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="op_sys"
+
+Mac OS
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="bug_status"
+
+CONFIRMED
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="assigned_to"
+
+1028630307@qq.com
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="cc"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="estimated_time"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="deadline"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="alias"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="bug_file_loc"
+
+http://
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="short_desc"
+
+124
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="comment"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="data"; filename=""
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="attach_text"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="description"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="contenttypemethod"
+
+autodetect
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="contenttypeselection"
+
+text/plain
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="contenttypeentry"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="dependson"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="blocked"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="see_also"
+
+
+----------------------------894724989085171737270160
+Content-Disposition: form-data; name="form_name"
+
+enter_bug
+----------------------------894724989085171737270160--

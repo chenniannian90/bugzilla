@@ -103,3 +103,8 @@ http://127.0.0.1:8090/cgi-bin/post_handler.cgi
 /opt/homebrew/var/log/httpd/error_log
 
 /opt/homebrew/var/log/httpd/cgi.log
+
+
+"ISO-8859-1"
+
+cpanm Devel::ebug

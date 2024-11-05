@@ -153,7 +153,7 @@ sub bug_end_of_create_validators{
     # if (!defined $arb_value || $arb_value eq '') {
     #     Bugzilla::Error::IllegalParam->throw("The 'ARB' field cannot be empty.");
     # }
-    print Dumper($bug_params)
+    warn Dumper($bug_params);
 }
 
 sub bug_end_of_create {
