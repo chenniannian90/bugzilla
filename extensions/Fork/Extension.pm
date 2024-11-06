@@ -83,6 +83,15 @@ sub db_schema_abstract_schema {
 }
 
 
+sub bug_fields {
+    my ($self, $args) = @_;
+    my $fields = $args->{'fields'};
+    push (@$fields, "parent_bug_id");
+    push (@$fields, "children_bug_ids");
+}
+
+
+
 sub _bug_parent_bug_id {
     my ($self) = @_;
     return $self->{'parent_bug_id'} if exists $self->{'parent_bug_id'};
