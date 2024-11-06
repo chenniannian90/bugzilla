@@ -144,25 +144,34 @@ sub _bug_children_bugs {
 
 sub bug_end_of_create_validators{
     my ($self, $args) = @_;
-
     # This code doesn't actually *do* anything, it's just here to show you
     # how to use this hook.
     my $bug_params = $args->{'params'};
-
     # my $arb_value = $bug->ct_arb;
     # if (!defined $arb_value || $arb_value eq '') {
     #     Bugzilla::Error::IllegalParam->throw("The 'ARB' field cannot be empty.");
     # }
+    # todo check parent_bug_id if exist
+    my $parent_bug_id = $bug_params->{parent_bug_id};
+    if (defined $parent_bug_id && $parent_bug_id){
+        # todo ok?
+        Bugzilla::Bug->check($parent_bug_id);
+    }
     warn Dumper($bug_params);
 }
 
 sub bug_end_of_create {
-
+    my ($self, $args) = @_;
+    # This code doesn't actually *do* anything, it's just here to show you
+    # how to use this hook.
+    my $bug = $args->{'bug'};
+    my $timestamp = $args->{'timestamp'};
+    warn Dumper($args);
 }
 
-sub bug_end_of_update {
-
-}
+# sub bug_end_of_update {
+#
+# }
 
 
 __PACKAGE__->NAME;

@@ -6,20 +6,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use CGI qw(:standard);
-use Devel::REPL;
 
-
-my $a = 10;
-my $b = 20;
-my $c = $a + $b;
-
-
-
-my $repl = Devel::REPL->new;
-$repl->load_plugin($_) for qw(History LexEnv);
-$repl->run;
-
-print "Sum: $c\n";
 
 my $bug_params = {
     'assigned_to' => '1028630307@qq.com',
@@ -50,7 +37,12 @@ my $bug_params = {
 
 
 
-
+my $c = $bug_params->{bug_severity};
+if (defined $c && $c){
+   print($c);
+}else{
+        print("11");
+}
 
 
 
