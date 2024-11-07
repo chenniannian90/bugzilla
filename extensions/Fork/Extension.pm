@@ -37,12 +37,6 @@ sub install_update_db {
         $field = Bugzilla::Field->create({
             name        => 'fork_bug_id',
             description => 'ForkBugID',
-            custom => 1,
-            type => 0,
-            enter_bug   => 1,
-            # custom      => 1,
-            # enter_bug   => 1,         # 在创建 Bug 时可见
-            # buglist     => 1,         # 在 Bug 列表中可见
         });
     }
 }
