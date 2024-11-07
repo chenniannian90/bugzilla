@@ -28,6 +28,8 @@ use Bugzilla::Extension::Fork::Util;
 our $VERSION = '0.01';
 
 
+exit();
+
 # See the documentation of Bugzilla::Hook ("perldoc Bugzilla::Hook"
 # in the bugzilla directory) for a list of all available hooks.
 
@@ -140,9 +142,14 @@ sub bug_end_of_create {
     my $bug = $args->{'bug'};
     my $timestamp = $args->{'timestamp'};
     my $fork_bug_id = &GetParam('fork_bug_id');
+    if ($fork_bug_id =~ /^(\d+)$/) {
+        $fork_bug_id = $1;  # 去污
+    } else {
+        $fork_bug_id = 0;
+    }
     if (defined $fork_bug_id && $fork_bug_id){
         my $dbh = Bugzilla->dbh;
-        my $sql = "INSERT INTO fork_relation (fork_bug_id, bugs_id, creation_ts) VALUES (?,?, ?)";
+        my $sql = "INSERT INTO fork_relation (fork_bug_id, bug_id, creation_ts) VALUES (?,?, ?)";
         my $sth = $dbh->prepare($sql);
         $sth->execute($fork_bug_id, $bug->{id}, $timestamp);
     }
