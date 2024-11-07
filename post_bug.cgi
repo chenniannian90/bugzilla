@@ -23,6 +23,7 @@ use Bugzilla::User;
 use Bugzilla::Hook;
 use Bugzilla::Token;
 use Bugzilla::Flag;
+use Data::Dumper;
 
 use List::MoreUtils qw(uniq);
 
@@ -107,10 +108,21 @@ push(@bug_fields, qw(
     estimated_time
     deadline
 ));
+
+
+warn Dumper(\@bug_fields);
+
 my %bug_params;
 foreach my $field (@bug_fields) {
+    warn Dumper($cgi->param($field));
     $bug_params{$field} = $cgi->param($field);
 }
+
+warn Dumper("111");
+warn Dumper($cgi->param('fork_bug_id'));
+
+
+
 foreach my $field (qw(cc groups)) {
     next if !$cgi->should_set($field);
     $bug_params{$field} = [$cgi->param($field)];

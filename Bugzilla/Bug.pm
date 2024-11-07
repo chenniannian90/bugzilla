@@ -30,6 +30,7 @@ use Bugzilla::Status;
 use Bugzilla::Comment;
 use Bugzilla::BugUrl;
 use Bugzilla::BugUserLastVisit;
+use Data::Dumper;
 
 use List::MoreUtils qw(firstidx uniq part);
 use List::Util qw(min max first);
@@ -689,6 +690,10 @@ sub possible_duplicates {
 # C<deadline>       - For time-tracking. Will be ignored for the same
 #                     reasons as C<estimated_time>.
 sub create {
+
+    # todo
+
+
     my ($class, $params) = @_;
     my $dbh = Bugzilla->dbh;
 
