@@ -91,7 +91,6 @@ sub bug_fields {
 }
 
 
-
 sub _bug_fork_bug_id {
     my ($self) = @_;
     return $self->{'fork_bug_id'} if exists $self->{'fork_bug_id'};
@@ -111,8 +110,6 @@ sub _bug_fork_bug_id {
 }
 
 
-
-
 sub _bug_fork_bug {
     my $self = shift;
     return $self->{'fork_bug'} if exists $self->{'fork_bug'};
@@ -125,7 +122,6 @@ sub _bug_fork_bug {
     }
     return $self->{'fork_bug'}
 }
-
 
 
 sub bug_end_of_create_validators{
@@ -142,6 +138,7 @@ sub bug_end_of_create_validators{
     if (defined $fork_bug_id && $fork_bug_id){
         Bugzilla::Bug->check($fork_bug_id);
     }
+    warn "bug_end_of_create_validators";
     warn Dumper($bug_params);
 }
 
@@ -151,6 +148,7 @@ sub bug_end_of_create {
     # how to use this hook.
     my $bug = $args->{'bug'};
     my $timestamp = $args->{'timestamp'};
+    warn "bug_end_of_create";
     warn Dumper($args);
 }
 
