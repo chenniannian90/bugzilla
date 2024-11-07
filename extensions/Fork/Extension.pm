@@ -149,7 +149,7 @@ sub bug_end_of_create {
         my $dbh = Bugzilla->dbh;
         my $sql = "INSERT INTO fork_relation (fork_bug_id, bug_id, creation_ts) VALUES (?,?, ?)";
         my $sth = $dbh->prepare($sql);
-        $sth->execute($fork_bug_id, $bug->{id}, $timestamp);
+        $sth->execute($fork_bug_id, $bug->{bug_id}, $timestamp);
     }
 }
 
