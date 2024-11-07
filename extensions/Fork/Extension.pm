@@ -75,7 +75,7 @@ sub bug_fields {
     warn "enter bug_fields";
     my ($self, $args) = @_;
     my $fields = $args->{'fields'};
-    push (@$fields, "fork_bug_id");
+    push (@$fields, "fork_bug_id")
 }
 
 
