@@ -6,9 +6,11 @@
   # defined by the Mozilla Public License, v. 2.0.
   #%]
 
+<p>line 9</p>
 [% title = BLOCK %]Enter [% terms.Bug %]: [% product.name FILTER html %][% END %]
 [% use_qa_contact = Param("useqacontact") %]
 
+<p>line 12</p>
 [% PROCESS global/header.html.tmpl
   title = title
   generate_api_token = 1
@@ -81,7 +83,9 @@ TUI_hide_default('attachment_text_field');
       class="enter_bug_form" enctype="multipart/form-data"
       onsubmit="return validateEnterBug(this)">
 <input type="hidden" name="product" value="[% product.name FILTER html %]">
-<input type="hidden" name="token" value="[% token FILTER html %]">
+[% IF fork_bug %]
+    <input type="hidden" name="fork_bug_id" value="[% fork_bug.id FILTER html %]">
+[% END %]
 
 <table>
 <tbody>

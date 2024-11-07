@@ -1,0 +1,8 @@
+[% PROCESS fork_bug %]
+
+
+[% BLOCK fork_bug %]
+[% IF fork_bug %]
+    <p> helloword </p>
+    <p> [% fork_bug.id %] </p>
+[% END %]
