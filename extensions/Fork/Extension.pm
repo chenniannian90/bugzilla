@@ -148,6 +148,26 @@ sub bug_end_of_create {
 
 sub _insert_fork_bug{
     my ($fork_bug_id, $bug_id, $timestamp) = @_;
+
+    # 对参数进行去污
+    if ($fork_bug_id =~ /^(\\d+)$/) {
+        $fork_bug_id = $1;  # 去污
+    } else {
+        die "Invalid fork_bug_id";
+    }
+
+    if ($bug_id =~ /^(\\d+)$/) {
+        $bug_id = $1;  # 去污
+    } else {
+        die "Invalid bug_id";
+    }
+
+    if ($timestamp =~ /^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$/) {
+        $timestamp = $1;  # 去污
+    } else {
+        die "Invalid timestamp";
+    }
+
     warn "_insert_fork_bug";
     warn Dumper(\@_);
     my $dbh = Bugzilla->dbh;
