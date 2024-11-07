@@ -41,6 +41,10 @@ my $user = Bugzilla->login(LOGIN_REQUIRED);
 my $cloned_bug;
 my $cloned_bug_id;
 
+
+my $fork_bug;
+my $fork_bug_id;
+
 my $cgi = Bugzilla->cgi;
 my $dbh = Bugzilla->dbh;
 my $template = Bugzilla->template;
@@ -147,6 +151,14 @@ if ($cloned_bug_id) {
     $cloned_bug_id = $cloned_bug->id;
 }
 
+
+$fork_bug_id = $cgi->param('fork_bug_id');
+
+if ($fork_bug_id) {
+    $fork_bug = Bugzilla::Bug->check($fork_bug_id);
+    $fork_bug_id = $fork_bug->id;
+}
+
 # If there is only one active component, choose it
 my @active = grep { $_->is_active } @{$product->components};
 if (scalar(@active) == 1) {
@@ -162,6 +174,7 @@ if (scalar(@active) == 1) {
 my %default;
 
 $vars->{'product'}               = $product;
+$vars->{'fork_bug'}              = $fork_bug;
 
 $vars->{'priority'}              = get_legal_field_values('priority');
 $vars->{'bug_severity'}          = get_legal_field_values('bug_severity');
