@@ -28,8 +28,6 @@ use Bugzilla::Extension::Fork::Util;
 our $VERSION = '0.01';
 
 
-exit();
-
 # See the documentation of Bugzilla::Hook ("perldoc Bugzilla::Hook"
 # in the bugzilla directory) for a list of all available hooks.
 
