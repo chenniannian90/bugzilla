@@ -60,13 +60,14 @@ sub db_schema_abstract_schema {
                     COLUMN => 'bug_id',
                     DELETE => 'CASCADE',
                 } },
-            bug_id      => {TYPE => 'MEDIUMINT', NOTNULL => 1,
-                REFERENCES => {
-                    TABLE => 'bugs',
+            bug_id      => { TYPE => 'MEDIUMINT', NOTNULL => 1,
+                REFERENCES        => {
+                    TABLE  => 'bugs',
                     COLUMN => 'bug_id',
                     DELETE => 'CASCADE',
-                },
-            }
+                }},
+            creation_ts  => { TYPE => 'DATETIME', NOTNULL => 1,
+            },
         ],
         INDEXES => [
             fork_relation_fork_bug_id_idx => {FIELDS => ['fork_bug_id', 'bug_id'], TYPE=>'UNIQUE'},
@@ -126,16 +127,10 @@ sub bug_end_of_create_validators{
     # if (!defined $arb_value || $arb_value eq '') {
     #     Bugzilla::Error::IllegalParam->throw("The 'ARB' field cannot be empty.");
     # }
-    # todo check fork_bug_id if exist
-    my $fork_bug_id = $bug_params->{fork_bug_id};
+    my $fork_bug_id = &GetParam('fork_bug_id');
     if (defined $fork_bug_id && $fork_bug_id){
         Bugzilla::Bug->check($fork_bug_id);
     }
-    warn "bug_end_of_create_validators";
-    warn Dumper($bug_params);
-
-    $fork_bug_id = &GetParam('fork_bug_id');
-    warn "fork_bug_id : $fork_bug_id";
 }
 
 sub bug_end_of_create {
@@ -144,11 +139,20 @@ sub bug_end_of_create {
     # how to use this hook.
     my $bug = $args->{'bug'};
     my $timestamp = $args->{'timestamp'};
-    warn "bug_end_of_create";
-    warn Dumper($args);
-
     my $fork_bug_id = &GetParam('fork_bug_id');
-    warn "fork_bug_id : $fork_bug_id";
+    if (defined $fork_bug_id && $fork_bug_id){
+        _insert_fork_bug($fork_bug_id, $bug->{id}, $timestamp)
+    }
+}
+
+
+sub _insert_fork_bug{
+    my ($fork_bug_id, $bug_id, $timestamp) = @_;
+    warn "_insert_fork_bug";
+    warn Dumper(\@_);
+    my $dbh = Bugzilla->dbh;
+    $dbh->do('INSERT INTO fork_relation (fork_bug_id, bugs_id, creation_ts) VALUES (?,?, ?)',
+        undef, $fork_bug_id, $bug_id, $timestamp);
 }
 
 # sub bug_end_of_update {
