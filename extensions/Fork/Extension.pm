@@ -42,6 +42,14 @@ sub install_update_db {
 }
 
 
+sub GetParam {
+    my ($key) = @_;
+    my $param = Bugzilla->input_params;
+    return () unless exists $param->{$key};
+    $param = $param->{$key};
+    return ref $param ? @$param : ($param);
+}
+
 sub db_schema_abstract_schema {
     my ($self, $args) = @_;
     $args->{'schema'}->{'fork_relation'} = {
@@ -125,6 +133,9 @@ sub bug_end_of_create_validators{
     }
     warn "bug_end_of_create_validators";
     warn Dumper($bug_params);
+
+    $fork_bug_id = &GetParam('fork_bug_id');
+    warn "fork_bug_id : $fork_bug_id";
 }
 
 sub bug_end_of_create {
@@ -135,6 +146,9 @@ sub bug_end_of_create {
     my $timestamp = $args->{'timestamp'};
     warn "bug_end_of_create";
     warn Dumper($args);
+
+    my $fork_bug_id = &GetParam('fork_bug_id');
+    warn "fork_bug_id : $fork_bug_id";
 }
 
 # sub bug_end_of_update {

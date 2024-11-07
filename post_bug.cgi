@@ -109,7 +109,6 @@ push(@bug_fields, qw(
     deadline
 ));
 
-push(@bug_fields, 'fork_bug_id');
 
 my %bug_params;
 foreach my $field (@bug_fields) {
