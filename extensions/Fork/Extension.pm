@@ -151,8 +151,9 @@ sub _insert_fork_bug{
     warn "_insert_fork_bug";
     warn Dumper(\@_);
     my $dbh = Bugzilla->dbh;
-    $dbh->do('INSERT INTO fork_relation (fork_bug_id, bugs_id, creation_ts) VALUES (?,?, ?)',
-        undef, $fork_bug_id, $bug_id, $timestamp);
+    my $sql = "INSERT INTO fork_relation (fork_bug_id, bugs_id, creation_ts) VALUES (?,?, ?)";
+    my $sth = $dbh->prepare($sql);
+    $sth->execute($fork_bug_id, $bug_id, $timestamp);
 }
 
 # sub bug_end_of_update {
