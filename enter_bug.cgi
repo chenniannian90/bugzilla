@@ -174,7 +174,7 @@ if (scalar(@active) == 1) {
 my %default;
 
 $vars->{'product'}               = $product;
-$vars->{'fork_bug'}              = $fork_bug;
+$vars->{'fork_bug_id'}              = $fork_bug_id;
 
 $vars->{'priority'}              = get_legal_field_values('priority');
 $vars->{'bug_severity'}          = get_legal_field_values('bug_severity');

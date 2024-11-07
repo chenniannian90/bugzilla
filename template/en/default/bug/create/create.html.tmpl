@@ -82,9 +82,7 @@ TUI_hide_default('attachment_text_field');
       onsubmit="return validateEnterBug(this)">
 <input type="hidden" name="product" value="[% product.name FILTER html %]">
 <input type="hidden" name="token" value="[% token FILTER html %]">
-[% IF fork_bug %]
-    <input type="hidden" name="fork_bug_id" value="[% fork_bug.id FILTER html %]">
-[% END %]
+<input type="hidden" name="fork_bug_id" value="[% fork_bug_id FILTER html %]">
 
 <table>
 <tbody>
