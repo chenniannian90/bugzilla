@@ -114,14 +114,8 @@ warn Dumper(\@bug_fields);
 
 my %bug_params;
 foreach my $field (@bug_fields) {
-    warn Dumper($cgi->param($field));
     $bug_params{$field} = $cgi->param($field);
 }
-
-warn Dumper("111");
-warn Dumper($cgi->param('fork_bug_id'));
-
-
 
 foreach my $field (qw(cc groups)) {
     next if !$cgi->should_set($field);
