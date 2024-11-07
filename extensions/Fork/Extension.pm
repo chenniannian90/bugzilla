@@ -5,6 +5,14 @@
 # This Source Code Form is "Incompatible With Secondary Licenses", as
 # defined by the Mozilla Public License, v. 2.0.
 
+BEGIN {
+    *Bugzilla::Bug::fork_bug_id = \&Bugzilla::Extension::Fork::_bug_fork_bug_id;
+    *Bugzilla::Bug::fork_bug = \&Bugzilla::Extension::Fork::_bug_fork_bug;
+}
+
+
+package Bugzilla::Extension::Fork;
+
 use 5.10.1;
 use strict;
 use warnings;
@@ -19,11 +27,6 @@ use Bugzilla::Extension::Fork::Util;
 
 our $VERSION = '0.01';
 
-
-BEGIN {
-    *Bugzilla::Bug::fork_bug_id = \&Bugzilla::Extension::Fork::_bug_fork_bug_id;
-    *Bugzilla::Bug::fork_bug = \&Bugzilla::Extension::Fork::_bug_fork_bug;
-}
 
 # See the documentation of Bugzilla::Hook ("perldoc Bugzilla::Hook"
 # in the bugzilla directory) for a list of all available hooks.
