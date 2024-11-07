@@ -141,39 +141,11 @@ sub bug_end_of_create {
     my $timestamp = $args->{'timestamp'};
     my $fork_bug_id = &GetParam('fork_bug_id');
     if (defined $fork_bug_id && $fork_bug_id){
-        _insert_fork_bug($fork_bug_id, $bug->{id}, $timestamp)
+        my $dbh = Bugzilla->dbh;
+        my $sql = "INSERT INTO fork_relation (fork_bug_id, bugs_id, creation_ts) VALUES (?,?, ?)";
+        my $sth = $dbh->prepare($sql);
+        $sth->execute($fork_bug_id, $bug->{id}, $timestamp);
     }
-}
-
-
-sub _insert_fork_bug{
-    my ($fork_bug_id, $bug_id, $timestamp) = @_;
-
-    # 对参数进行去污
-    if ($fork_bug_id =~ /^(\\d+)$/) {
-        $fork_bug_id = $1;  # 去污
-    } else {
-        die "Invalid fork_bug_id";
-    }
-
-    if ($bug_id =~ /^(\\d+)$/) {
-        $bug_id = $1;  # 去污
-    } else {
-        die "Invalid bug_id";
-    }
-
-    if ($timestamp =~ /^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$/) {
-        $timestamp = $1;  # 去污
-    } else {
-        die "Invalid timestamp";
-    }
-
-    warn "_insert_fork_bug";
-    warn Dumper(\@_);
-    my $dbh = Bugzilla->dbh;
-    my $sql = "INSERT INTO fork_relation (fork_bug_id, bugs_id, creation_ts) VALUES (?,?, ?)";
-    my $sth = $dbh->prepare($sql);
-    $sth->execute($fork_bug_id, $bug_id, $timestamp);
 }
 
 # sub bug_end_of_update {
