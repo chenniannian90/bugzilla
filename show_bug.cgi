@@ -1,4 +1,4 @@
-#!/usr/bin/perl -T
+#!/usr/bin/perl
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -46,6 +46,7 @@ my %marks;
 # will be reloaded anyway, from the main DB.
 Bugzilla->switch_to_shadow_db unless $user->id;
 
+
 if ($single) {
     my $id = $cgi->param('id');
     push @bugs, Bugzilla::Bug->check({ id => $id, cache => 1 });
@@ -92,6 +93,12 @@ if ($single) {
 }
 
 Bugzilla::Bug->preload(\@bugs);
+
+
+# 获取 fork_comment
+foreach my $bug (@bugs) {
+   $bug->full_comments;
+}
 
 $vars->{'bugs'} = [@bugs, @illegal_bugs];
 $vars->{'marks'} = \%marks;

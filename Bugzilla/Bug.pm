@@ -690,10 +690,6 @@ sub possible_duplicates {
 # C<deadline>       - For time-tracking. Will be ignored for the same
 #                     reasons as C<estimated_time>.
 sub create {
-
-    # todo
-
-
     my ($class, $params) = @_;
     my $dbh = Bugzilla->dbh;
 
@@ -3622,6 +3618,7 @@ sub keyword_objects {
     return $self->{'keyword_objects'};
 }
 
+
 sub comments {
     my ($self, $params) = @_;
     return [] if $self->{'error'};
@@ -3667,6 +3664,120 @@ sub comments {
     }
     return \@comments;
 }
+
+
+sub full_comments {
+    my ($self, $params) = @_;
+    return [] if $self->{'error'};
+    $params ||= {};
+
+    if (!defined $self->{'full_comments'}) {
+        $self->{'full_comments'} = Bugzilla::Comment->match({ bug_id => $self->id });
+
+        my $fork_bug_id =  $self->fork_bug_id;
+        if (defined $fork_bug_id || !$fork_bug_id){
+            my $fork_bug =  $self->fork_bug;
+            my $fork_comments = Bugzilla::Comment->match({ bug_id => $fork_bug_id});
+            @{$fork_comments} = grep {datetime_from($_->creation_ts) < datetime_from($self->creation_ts)} @{$fork_comments};
+            foreach my $comment (@{$fork_comments}) {
+                $comment->{bug} = $fork_bug;
+                $comment->{is_fork} = 1
+            }
+            splice(@{$self->{'full_comments'}}, 0, 0, @{$fork_comments});
+        }
+
+        my $count = 0;
+        state $is_mysql = Bugzilla->dbh->isa('Bugzilla::DB::Mysql') ? 1 : 0;
+        foreach my $comment (@{ $self->{'full_comments'} }) {
+            if ( !defined($comment->{is_fork}) || !$comment->{is_fork}){
+                $comment->{bug} = $self;
+            }
+            $comment->{count} = $count++;
+            # XXX - hack for MySQL. Convert [U+....] back into its Unicode
+            # equivalent for characters above U+FFFF as MySQL older than 5.5.3
+            # cannot store them, see Bugzilla::Comment::_check_thetext().
+            if ($is_mysql) {
+                # Perl 5.13.8 and older complain about non-characters.
+                no warnings 'utf8';
+                $comment->{thetext} =~ s/\x{FDD0}\[U\+((?:[1-9A-F]|10)[0-9A-F]{4})\]\x{FDD1}/chr(hex $1)/eg
+            }
+        }
+        # Some bugs may have no comments when upgrading old installations.
+        Bugzilla::Comment->preload($self->{'full_comments'}) if $count;
+    }
+    my @comments = @{ $self->{'full_comments'} };
+
+    my $order = $params->{order}
+        || Bugzilla->user->setting('comment_sort_order');
+    if ($order ne 'oldest_to_newest') {
+        @comments = reverse @comments;
+        if ($order eq 'newest_to_oldest_desc_first') {
+            unshift(@comments, pop @comments);
+        }
+    }
+    if ($params->{after}) {
+        my $from = datetime_from($params->{after});
+        @comments = grep { datetime_from($_->creation_ts) > $from } @comments;
+    }
+    if ($params->{to}) {
+        my $to = datetime_from($params->{to});
+        @comments = grep { datetime_from($_->creation_ts) <= $to } @comments;
+    }
+    return \@comments;
+}
+
+sub fork_comments {
+    my ($self, $params) = @_;
+    return [] if $self->{'error'};
+    $params ||= {};
+    my $fork_bug_id =  $self->fork_bug_id;
+    return [] if !defined $fork_bug_id || !$fork_bug_id;
+
+    if (!defined $self->{'fork_comments'}) {
+        my $fork_bug =  $self->fork_bug;
+        $self->{'fork_comments'} = Bugzilla::Comment->match({ bug_id => $fork_bug_id});
+        my @fork_comments = @{ $self->{'fork_comments'} };
+        @fork_comments = grep {datetime_from($_->creation_ts) < datetime_from($self->creation_ts)} @fork_comments;
+        $self->{'fork_comments'} = \@fork_comments;
+        my $count = 0;
+        state $is_mysql = Bugzilla->dbh->isa('Bugzilla::DB::Mysql') ? 1 : 0;
+        foreach my $comment (@{ $self->{'fork_comments'} }) {
+            $comment->{count} = $count++;
+            $comment->{bug} = $fork_bug;
+            # XXX - hack for MySQL. Convert [U+....] back into its Unicode
+            # equivalent for characters above U+FFFF as MySQL older than 5.5.3
+            # cannot store them, see Bugzilla::Comment::_check_thetext().
+            if ($is_mysql) {
+                # Perl 5.13.8 and older complain about non-characters.
+                no warnings 'utf8';
+                $comment->{thetext} =~ s/\x{FDD0}\[U\+((?:[1-9A-F]|10)[0-9A-F]{4})\]\x{FDD1}/chr(hex $1)/eg
+            }
+        }
+        # Some bugs may have no comments when upgrading old installations.
+        Bugzilla::Comment->preload($self->{'fork_comments'}) if $count;
+    }
+    my @comments = @{ $self->{'fork_comments'} };
+
+    my $order = $params->{order}
+        || Bugzilla->user->setting('comment_sort_order');
+    if ($order ne 'oldest_to_newest') {
+        @comments = reverse @comments;
+        if ($order eq 'newest_to_oldest_desc_first') {
+            unshift(@comments, pop @comments);
+        }
+    }
+    if ($params->{after}) {
+        my $from = datetime_from($params->{after});
+        @comments = grep { datetime_from($_->creation_ts) > $from } @comments;
+    }
+    if ($params->{to}) {
+        my $to = datetime_from($params->{to});
+        @comments = grep { datetime_from($_->creation_ts) <= $to } @comments;
+    }
+    return \@comments;
+}
+
+
 
 sub new_bug_statuses {
     my ($class, $product) = @_;
