@@ -94,10 +94,9 @@ if ($single) {
 
 Bugzilla::Bug->preload(\@bugs);
 
-
 # 获取 fork_comment
 foreach my $bug (@bugs) {
-   $bug->full_comments;
+    $bug->{comments} = $bug->full_comments;
 }
 
 $vars->{'bugs'} = [@bugs, @illegal_bugs];
@@ -133,6 +132,7 @@ foreach ($cgi->param("excludefield")) {
 $vars->{'displayfields'} = \%displayfields;
 
 print $cgi->header($format->{'ctype'});
+
 
 $template->process($format->{'template'}, $vars)
   || ThrowTemplateError($template->error());

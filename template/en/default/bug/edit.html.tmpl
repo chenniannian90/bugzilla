@@ -166,7 +166,7 @@
   [%# *** Additional Comments *** %]
   <div id="comments">
     [% PROCESS bug/comments.html.tmpl
-      comments = bug.full_comments ? bug.full_comments: bug.comments
+      comments = bug.comments
       mode = user.id ? "edit" : "show"
     %]
   </div>
